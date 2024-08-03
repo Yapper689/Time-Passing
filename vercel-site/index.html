@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Time Passing</title>
+    <style>
+        body {
+            --tw-bg-opacity: 1;
+            background-color: rgb(24 24 27 / var(--tw-bg-opacity)) /* #18181b */;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        .container{
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            -webkit-font-smoothing: auto;
+            -moz-osx-font-smoothing: auto;
+            --tw-text-opacity: 1;
+            color: rgb(248 250 252 / var(--tw-text-opacity)) /* #f8fafc */;
+            font-size: 3rem /* 48px */;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+	<audio id="audio" src="There Is Still Time.mp3" muted autoplay loop></audio>
+	<div id="datetime" class="container"></div>
+	<script is:inline>
+		function updateDateTime() {
+			const now = new Date();
+			const year = now.getFullYear();
+			const month = String(now.getMonth() + 1).padStart(2, '0');
+			const day = String(now.getDate()).padStart(2, '0');
+			const hours = String(now.getHours()).padStart(2, '0');
+			const minutes = String(now.getMinutes()).padStart(2, '0');
+			const seconds = String(now.getSeconds()).padStart(2, '0');
+			const milliseconds = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
+			const formattedDateTime = `${year} ${month} ${day} ${hours}:${minutes}:${seconds}:${milliseconds}`;
+			document.getElementById('datetime').innerText = formattedDateTime;
+		}
+		setInterval(updateDateTime, 1);
+		document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.querySelector('#audio');
+            document.addEventListener('click', () => {
+                audio.muted = false; 
+                audio.play();
+            });
+		});
+	</script>
+</body>
+</html>
